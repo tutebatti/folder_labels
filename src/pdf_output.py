@@ -2,7 +2,8 @@ from reportlab.lib import colors
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfgen import canvas
 
-from config import Measures, FontStyles
+from src.config import FontStyles
+from src.config.measures import Measures
 from src.folder_label import FolderLabel
 
 

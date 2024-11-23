@@ -12,4 +12,4 @@
 !sample_input.csv
 
 # exclude actual config
-config.py
+config.ini

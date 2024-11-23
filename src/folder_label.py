@@ -1,4 +1,6 @@
-from config import Width, Letter
+from src.config.width import Width
+from src.config.letter import Letter
+
 
 class FolderLabel:
     width: float

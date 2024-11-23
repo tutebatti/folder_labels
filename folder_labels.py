@@ -4,7 +4,7 @@ import sys
 
 from src.folder_label import FolderLabel
 from src.pdf_output import PdfOutput
-from config import Measures
+from src.config.measures import Measures
 
 
 def create_labels_from_csv(csv_file: str, outfile: str):
