@@ -68,8 +68,8 @@ class Width(Enum):
     NARROW: float = Measures.CM_TO_POINTS * 3 # adapt, if necessary
 
 
-# adapt this (except you're Mary and Joe)
+# adapt this (except if you're Batman and Robin)
 class Letter(Enum):
-    Mary = "M"
-    Joe = "J"
-    Both = "B"
+    Batman = "B"
+    Robin = "R"
+    Team = "T"

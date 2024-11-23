@@ -1,4 +1,4 @@
-Mary	1	job	foo#bar	narrow
-Mary	2	car	foo#bar	narrow
-Joe	1	bike	bar#foo	wide
-Both	1	social security	narrow
+Batman	1	Alfred	social security#health care plan#employment contract	wide
+Batman	2	Batmobile	construction plans#insurance#repair bills	wide
+Robin	1	Robin Cycle	insurance#repair bills	narrow
+Team	1	Batcave	cleaning rota#property tax	narrow
