@@ -1,3 +1,15 @@
 .venv
+.idea
+
+# exclude pdf output and csv input
 *.pdf
 *.csv
+
+# exclude custom fonts
+*.ttf
+
+# include sample csv
+!sample_input.csv
+
+# exclude actual config
+config.py
