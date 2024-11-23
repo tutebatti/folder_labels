@@ -2,7 +2,7 @@
 
 ## Idea
 
-Print labels for folders (the non-digital ones, holding paper and stuff).
+Create labels for folders (the non-digital ones, holding paper and stuff).
 
 Each label holds:
 
