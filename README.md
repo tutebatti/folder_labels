@@ -49,6 +49,13 @@ Robin	1	Robin Cycle	insurance#repair bills	narrow
 Team	1	Batcave	cleaning rota#property tax	narrow
 ```
 
+The columns are as follows:  
+1. a name in the `Letter` class in `config.py` (see [below](#config-file))
+2. a number between 0 and 100 (exclusive)
+3. folder description; if it's too long for the width of the folder label, it is scaled down.
+4. folder items, separated by `#`; you can use all characters in an item except `#` and tabulator
+5. `narrow` or `wide` (as set in the `Width` class in `config.py`, see [below](#config-file))
+
 ## Config file
 
 The file `config.py` consists of
