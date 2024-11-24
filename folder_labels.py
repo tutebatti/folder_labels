@@ -6,16 +6,17 @@ from src.config import config
 from src.folder_label import FolderLabel
 from src.pdf_output import PdfOutput
 
-def create_labels_from_csv(csv_file: str, outfile: str):
+
+def create_pdf_from_csv(csv_file: str, outfile: str):
     pdf_output = PdfOutput(outfile, pagesize=config.measures.papersize)
-    labels: list[FolderLabel] = read_labels_from_file(csv_file)
+    labels: list[FolderLabel] = read_labels_from_csv(csv_file)
 
     for label in labels:
         pdf_output.add_label_to_canvas(label)
 
     pdf_output.save()
 
-def read_labels_from_file(infile: str, delimiter: str = "\t") -> list[FolderLabel]:
+def read_labels_from_csv(infile: str, delimiter: str = "\t") -> list[FolderLabel]:
     labels: list[FolderLabel] = list()
     with open(infile, "r") as file:
         reader = csv.reader(file, delimiter=delimiter)
@@ -29,7 +30,7 @@ def read_labels_from_file(infile: str, delimiter: str = "\t") -> list[FolderLabe
     return labels
 
 def main(csv_file: str, outfile: str):
-    create_labels_from_csv(csv_file, outfile)
+    create_pdf_from_csv(csv_file, outfile)
 
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])

@@ -58,7 +58,6 @@ class PdfOutput(canvas.Canvas):
             text=description)
 
     def add_items(self, items: list[str], label_width: float) -> None:
-        #config.measures.calculate_symbol_width()
         for idx, item in enumerate(items):
             self.add_list_symbol(idx)
             self.add_item(idx, item, label_width)
