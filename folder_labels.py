@@ -2,19 +2,18 @@
 import csv
 import sys
 
+from src.config import config
 from src.folder_label import FolderLabel
 from src.pdf_output import PdfOutput
-from src.config.measures import Measures
-
 
 def create_labels_from_csv(csv_file: str, outfile: str):
-    pdf = PdfOutput(outfile, pagesize=Measures.papersize)
+    pdf_output = PdfOutput(outfile, pagesize=config.measures.papersize)
     labels: list[FolderLabel] = read_labels_from_file(csv_file)
 
     for label in labels:
-        pdf.add_label_to_canvas(label)
+        pdf_output.add_label_to_canvas(label)
 
-    pdf.save()
+    pdf_output.save()
 
 def read_labels_from_file(infile: str, delimiter: str = "\t") -> list[FolderLabel]:
     labels: list[FolderLabel] = list()

@@ -1,5 +1,4 @@
-from src.config.width import Width
-from src.config.letter import Letter
+from src.config import config
 
 
 class FolderLabel:
@@ -9,20 +8,24 @@ class FolderLabel:
     description: str
     items: list[str]
 
-    def __init__(self, letter: str, number: int, description: str, items: list[str], width: str):
+    def __init__(self,
+                 letter: str,
+                 number: int,
+                 description: str,
+                 items: list[str],
+                 width: str):
 
         if number <= 0 or number >=100:
             raise ValueError(f"Number must be between 0 and 100")
 
-        try:
-            self.letter = Letter[letter].value
-        except KeyError:
-            raise ValueError(f"Invalid letter. Choose from: {[e.name for e in Letter]}")
 
-        try:
-            self.width = Width[width.upper()].value
-        except KeyError:
-            raise ValueError(f"Invalid width. Choose from: {[e.name for e in Width]}")
+        if letter not in config.letters:
+            raise ValueError(f"{letter} is invalid. Choose from: {[key for key in config.letters]}")
+        self.letter = letter
+
+        if width not in config.widths:
+            raise ValueError(f"Invalid width. Choose from: {[key for key in config.widths]}")
+        self.width = config.widths[width]
 
         self.number = number
         self.description = description
