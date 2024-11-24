@@ -1,0 +1,5 @@
+- [ ] Introduce line break instead of scaling for items
+- [ ] Make item x_position depend on folder width
+- [ ] Validate sections in ini
+- [ ] Validate no duplicate values in dicts from ini
+- [ ] Refactor validation
