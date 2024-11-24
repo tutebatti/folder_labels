@@ -3,3 +3,4 @@
 - [ ] Validate sections in ini
 - [ ] Validate no duplicate values in dicts from ini
 - [ ] Refactor validation
+- [ ] Update README.md
