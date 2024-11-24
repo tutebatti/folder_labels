@@ -1,7 +1,8 @@
-- [ ] Introduce line break instead of scaling for items
-- [ ] Make item x_position depend on folder width
+- [ ] Introduce line break instead of scaling for items (using Paragraph from reportlab)
+- [ ] Make item x_position depend on folder width (by scaling using wide to narrow ratio?)
 - [ ] Validate sections in ini
 - [ ] Validate no duplicate values in dicts from ini
 - [ ] Refactor validation
 - [ ] Update README.md
 - [ ] Actually set pagesize from config.ini
+- [ ] Use cm from reportlab instead of own conversion?
