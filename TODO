@@ -1,11 +1,10 @@
-- [ ] Add
+- [ ] Add functionality for address labels
 
 - [ ] Experiment with rotating item list at 45 °
 
-- [x] Refactor validation
-
 - [ ] Update README.md
 
+- [x] Refactor validation
 - [x] Validate no duplicate values in dicts from ini
 - [x] Validate sections in ini
 - [x] Use cm from reportlab instead of own conversion

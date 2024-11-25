@@ -1,15 +1,14 @@
-from typing import Dict
-
 from src.config.measures import Measures
 from src.config.styles import Styles
-from src.config.util import widths_from_ini, letters_from_ini
+from src.config.widths import Widths
+from src.config.letters import Letters
 
 
 class Config:
     styles: Styles
     measures: Measures
-    widths: Dict[str, float]
-    letters: Dict[str, str]
+    widths: dict[str, float]
+    letters: dict[str, str]
 
     @classmethod
     def from_ini(cls, ini_file: str):
@@ -20,7 +19,7 @@ class Config:
         config.measures = Measures.from_ini(ini_file)
         config.measures.calculate_symbol_width(config.styles)
 
-        config.widths = widths_from_ini(ini_file)
-        config.letters = letters_from_ini(ini_file)
+        config.widths = Widths.from_ini(ini_file)
+        config.letters = Letters.from_ini(ini_file)
 
         return config

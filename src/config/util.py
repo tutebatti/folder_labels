@@ -1,7 +1,6 @@
 import configparser
 from configparser import ConfigParser
 
-from reportlab.lib.units import cm
 from reportlab.pdfbase import pdfmetrics
 
 
@@ -9,47 +8,6 @@ def determine_scale_factor(string: str, fontsize: int, max_width: float) -> floa
     from src.config import config
     string_width: float = pdfmetrics.stringWidth(string, config.styles.font, fontsize)
     return max_width / string_width * 0.9 if string_width >= max_width else 1
-
-
-def letters_from_ini(ini_file: str) -> dict:
-    config_parser = ConfigParser()
-    config_parser.optionxform = str
-    config_parser.read(ini_file)
-
-    validate_config_section("Letters", config_parser)
-
-    return letter_dict_from_config_parser(config_parser)
-
-
-def letter_dict_from_config_parser(config_parser: ConfigParser):
-    letter_dict: dict[str, str] = dict()
-    for k, v in config_parser["Letters"].items():
-        validate_string(k)
-        validate_string(v)
-        letter_dict[k] = v.strip('"').strip()
-    return letter_dict
-
-
-def widths_from_ini(ini_file: str) -> dict:
-    config_parser = ConfigParser()
-    config_parser.read(ini_file)
-    validate_config_section("Widths", config_parser)
-    return width_dict_from_config_parser(config_parser)
-
-
-def width_dict_from_config_parser(config_parser: ConfigParser):
-    width_dict: dict[str, float] = dict()
-
-    for k, v in config_parser["Widths"].items():
-        validate_string(k)
-        try:
-            value = float(v)
-        except ValueError:
-            raise ValueError(f"Invalid float value: {v}")
-
-        width_dict[k] = value * cm
-
-    return width_dict
 
 
 def validate_string(k: str):
