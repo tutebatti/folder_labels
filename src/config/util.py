@@ -52,7 +52,12 @@ def letters_from_ini(ini_file: str) -> dict:
     check_for_missing_section("Letters", config_parser)
 
     letter_dict: Dict[str, str] = dict()
+    values = set()
     for k, v in config_parser["Letters"].items():
+        if v in values:
+            raise ValueError(f"{k} has the duplicate value {v} compared to another key")
+        else:
+            values.add(v)
         if not isinstance(k, str):
             raise ValueError(f"Invalid name value (must be a string): {k}")
         if not isinstance(v, str):
@@ -70,7 +75,12 @@ def widths_from_ini(ini_file: str) -> dict:
     check_for_missing_section("Widths", config_parser)
 
     width_dict: Dict[str, float] = dict()
+    values = set()
     for k, v in config_parser["Widths"].items():
+        if v in values:
+            raise ValueError(f"{k} has the duplicate value {v} compared to another key")
+        else:
+            values.add(v)
         if not isinstance(k, str):
             raise ValueError(f"Invalid name value (must be a string): {k}")
         try:

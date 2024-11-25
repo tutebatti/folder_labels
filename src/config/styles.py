@@ -20,6 +20,7 @@ class Styles:
     item_size: int
 
     item_list_symbol: str
+    item_spacing: int
 
     @classmethod
     def from_ini(cls, ini_file: str):
@@ -29,9 +30,7 @@ class Styles:
 
         styles.read_font_types_from_config()
         styles.read_font_sizes_from_config()
-        # TODO: refactor the following two lines in one function
-        styles.item_list_symbol = styles.config_parser["Styles"].get("item_list_symbol").strip('"').strip() + " "
-        styles.item_spacing = styles.get_int_from_config("item_spacing")
+        styles.read_item_styling_from_config()
 
         return styles
     
@@ -60,3 +59,7 @@ class Styles:
     def register_font(self):
         if self.use_custom_font:
             pdfmetrics.registerFont(TTFont(name=self.font, filename=self.custom_font_file))
+
+    def read_item_styling_from_config(self):
+        self.item_list_symbol = self.config_parser["Styles"].get("item_list_symbol").strip('"').strip() + " "
+        self.item_spacing = self.get_int_from_config("item_spacing")

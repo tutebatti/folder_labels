@@ -1,10 +1,10 @@
 - [ ] Experiment with rotating item list at 45 °
 
-- [ ] Validate no duplicate values in dicts from ini
 - [ ] Refactor validation
 
 - [ ] Update README.md
 
+- [x] Validate no duplicate values in dicts from ini
 - [x] Validate sections in ini
 - [x] Use cm from reportlab instead of own conversion
 - [x] Actually set pagesize from config.ini
