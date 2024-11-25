@@ -1,4 +1,6 @@
-- [ ] Introduce line break instead of scaling for items (using Paragraph from reportlab)
+- [x] Introduce line break instead of scaling for items (using Paragraph from reportlab)
+- [ ] Experiment with rotating item list at 45 °
+- [ ] Move values for item spacing to config
 - [ ] Make item x_position depend on folder width (by scaling using wide to narrow ratio?)
 - [ ] Validate sections in ini
 - [ ] Validate no duplicate values in dicts from ini

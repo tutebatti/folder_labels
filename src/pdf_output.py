@@ -1,5 +1,7 @@
 from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.pdfgen import canvas
+from reportlab.platypus import Paragraph
 
 from src.config import config
 from src.config.util import determine_scale_factor
@@ -53,7 +55,7 @@ class PdfOutput(canvas.Canvas):
         scale_factor: float = determine_scale_factor(
             string=description,
             fontsize=config.styles.description_size,
-            max_width=label_width - 10)
+            max_width=label_width * 0.8)
         self.setFont(config.styles.font, config.styles.description_size * scale_factor)
         self.drawCentredString(
             x=self.x_offset + label_width / 2 + config.measures.description_x_offset_relative_to_label_center,
@@ -61,22 +63,27 @@ class PdfOutput(canvas.Canvas):
             text=description)
 
     def add_items(self, items: list[str], label_width: float) -> None:
-        for idx, item in enumerate(items):
-            self.add_list_symbol(idx)
-            self.add_item(idx, item, label_width)
+        items_text = '<br/>'.join([config.styles.item_list_symbol + " " + item for item in items])
 
-    def add_list_symbol(self, idx: int) -> None:
-        self.setFont(config.styles.font, config.styles.item_size)
-        self.drawString(x=self.x_offset + config.measures.items_x_offset,
-                        y=config.measures.items_y_position - config.measures.items_mutual_y_offset * idx,
-                        text=config.styles.item_list_symbol)
+        styles = getSampleStyleSheet()
+        item_style = styles['Normal']
+        item_style.fontName = config.styles.font
+        item_style.leading = 16
 
-    def add_item(self, idx: int, item: str, label_width: float):
-        scale_factor: float = determine_scale_factor(
-            string=config.styles.item_list_symbol + item,
-            fontsize=config.styles.item_size,
-            max_width=label_width - config.measures.items_x_offset - config.measures.symbol_width)
-        self.setFont(config.styles.font, config.styles.item_size * scale_factor)
-        self.drawString(x=self.x_offset + config.measures.items_x_offset + config.measures.symbol_width,
-                        y=config.measures.items_y_position - config.measures.items_mutual_y_offset * idx,
-                        text=item)
+        item_paragraph = Paragraph(items_text, item_style)
+
+        item_paragraph_width = label_width * 0.8
+        item_paragraph.wrapOn(self, item_paragraph_width, config.measures.label_height)
+        item_paragraph_y_position = config.measures.items_y_position - item_paragraph.height
+
+        item_paragraph.drawOn(self,
+                              self.x_offset + config.measures.items_x_offset,
+                              item_paragraph_y_position)
+
+        # # Translate the canvas 45 degrees
+        # c.translate(x_position + 10, y_position)  # Move the origin to the right of the bullet
+        # c.rotate(45)
+        # # Draw the rotated text
+        # c.drawString(0, 0, bullet)  # Text is drawn at the new rotated position
+        # # Restore the canvas state (so rotation doesn't affect subsequent elements)
+        # c.restoreState()
