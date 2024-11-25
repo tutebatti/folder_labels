@@ -3,7 +3,7 @@ from configparser import ConfigParser
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 
-from src.config.util import str_to_bool, get_int
+from src.config.util import str_to_bool, get_int, check_for_missing_section
 
 
 class Styles:
@@ -36,6 +36,7 @@ class Styles:
     def set_config_reader(self, ini_file: str):
         self.config_parser = ConfigParser()
         self.config_parser.read(ini_file)
+        check_for_missing_section("Styles", self.config_parser)
 
     def read_font_types_from_config(self):
         use_custom_font = self.config_parser["Styles"].get("use_custom_font", "False")

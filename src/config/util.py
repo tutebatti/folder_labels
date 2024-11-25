@@ -6,6 +6,11 @@ from reportlab.lib.units import cm
 from reportlab.pdfbase import pdfmetrics
 
 
+def check_for_missing_section(section: str, config_parser: ConfigParser):
+    if section not in config_parser:
+        raise ValueError(f"Section {section} missing in config")
+
+
 def str_to_bool(value: str) -> bool:
     """Helper method to convert string to boolean"""
     if value.lower() in ["true", "1", "yes"]:
@@ -35,6 +40,7 @@ def letters_from_ini(ini_file: str) -> dict:
     config_parser = ConfigParser()
     config_parser.optionxform = str
     config_parser.read(ini_file)
+    check_for_missing_section("Letters", config_parser)
 
     letter_dict: Dict[str, str] = dict()
     for k, v in config_parser["Letters"].items():
@@ -52,6 +58,7 @@ def letters_from_ini(ini_file: str) -> dict:
 def widths_from_ini(ini_file: str) -> dict:
     config_parser = ConfigParser()
     config_parser.read(ini_file)
+    check_for_missing_section("Widths", config_parser)
 
     width_dict: Dict[str, float] = dict()
     for k, v in config_parser["Widths"].items():

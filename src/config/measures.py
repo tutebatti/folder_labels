@@ -5,7 +5,7 @@ from reportlab.lib.units import cm
 from reportlab.pdfbase import pdfmetrics
 
 from src.config import util
-from src.config.util import get_int
+from src.config.util import get_int, check_for_missing_section
 from src.config.styles import Styles
 
 
@@ -50,6 +50,7 @@ class Measures:
     def set_config_reader(self, ini_file: str):
         self.config_parser = ConfigParser()
         self.config_parser.read(ini_file)
+        check_for_missing_section("Measures", self.config_parser)
 
     def read_general_measures_from_config(self):
         self.label_height = cm * self.get_int_from_config("label_height")
