@@ -1,10 +1,12 @@
 - [x] Introduce line break instead of scaling for items (using Paragraph from reportlab)
 - [ ] Experiment with rotating item list at 45 °
 - [ ] Move values for item spacing to config
-- [ ] Make item x_position depend on folder width (by scaling using wide to narrow ratio?)
+
 - [ ] Validate no duplicate values in dicts from ini
 - [ ] Refactor validation
+
 - [ ] Update README.md
-- [ ] Actually set pagesize from config.ini
+
 - [x] Validate sections in ini
 - [x] Use cm from reportlab instead of own conversion
+- [x] Actually set pagesize from config.ini

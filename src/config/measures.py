@@ -1,10 +1,10 @@
 from configparser import ConfigParser
 
-from reportlab.lib.pagesizes import landscape, A4
+from reportlab.lib import pagesizes
+from reportlab.lib.pagesizes import landscape
 from reportlab.lib.units import cm
 from reportlab.pdfbase import pdfmetrics
 
-from src.config import util
 from src.config.util import get_int, check_for_missing_section
 from src.config.styles import Styles
 
@@ -54,7 +54,7 @@ class Measures:
 
     def read_general_measures_from_config(self):
         self.label_height = cm * self.get_int_from_config("label_height")
-        self.papersize = landscape(A4)  # TODO
+        self.papersize = landscape(getattr(pagesizes, self.config_parser["Measures"].get("papersize").strip('"')))
         self.paperwidth = self.papersize[0]
 
     def read_general_offsets_from_config(self):
@@ -69,20 +69,26 @@ class Measures:
         self.set_items_position_from_config()
 
     def set_letter_position_from_config(self):
-        self.letter_x_offset_relative_to_label_center = self.get_int_from_config("letter_x_offset_relative_to_label_center")
+        self.letter_x_offset_relative_to_label_center = self.get_int_from_config(
+            "letter_x_offset_relative_to_label_center")
         self.letter_y_position = self.y_offset + self.label_height + self.get_int_from_config("letter_y_offset")
 
     def set_number_position_from_config(self):
-        self.number_x_offset_relative_to_label_center = self.get_int_from_config("number_x_offset_relative_to_label_center")
-        self.number_y_position = self.letter_y_position + self.get_int_from_config("number_y_offset_relative_to_letter")
+        self.number_x_offset_relative_to_label_center = self.get_int_from_config(
+            "number_x_offset_relative_to_label_center")
+        self.number_y_position = self.letter_y_position + self.get_int_from_config(
+            "number_y_offset_relative_to_letter")
 
     def set_description_position_from_config(self):
-        self.description_x_offset_relative_to_label_center = self.get_int_from_config("description_x_offset_relative_to_label_center")
-        self.description_y_position = self.letter_y_position + self.get_int_from_config("description_y_offset_relative_to_letter")
+        self.description_x_offset_relative_to_label_center = self.get_int_from_config(
+            "description_x_offset_relative_to_label_center")
+        self.description_y_position = self.letter_y_position + self.get_int_from_config(
+            "description_y_offset_relative_to_letter")
 
     def set_items_position_from_config(self):
         self.items_x_offset = self.get_int_from_config("items_x_offset")
-        self.items_y_position = self.description_y_position + self.get_int_from_config("first_item_y_offset_relative_to_description")
+        self.items_y_position = self.description_y_position + self.get_int_from_config(
+            "first_item_y_offset_relative_to_description")
         self.items_mutual_y_offset = self.get_int_from_config("items_mutual_y_offset")
 
     def calculate_symbol_width(self, styles: Styles):
