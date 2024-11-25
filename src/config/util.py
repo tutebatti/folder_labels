@@ -2,9 +2,8 @@ import configparser
 from configparser import ConfigParser
 from typing import Dict
 
+from reportlab.lib.units import cm
 from reportlab.pdfbase import pdfmetrics
-
-CM_TO_POINTS: float = 28.35  # leave unchanged
 
 
 def str_to_bool(value: str) -> bool:
@@ -62,7 +61,7 @@ def widths_from_ini(ini_file: str) -> dict:
             value = float(v)
         except ValueError:
             raise ValueError(f"Invalid float value: {v}")
-        width_dict[k] = value * CM_TO_POINTS
+        width_dict[k] = value * cm
 
     # TODO: check for duplicate values
 

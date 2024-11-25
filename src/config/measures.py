@@ -1,6 +1,7 @@
 from configparser import ConfigParser
 
 from reportlab.lib.pagesizes import landscape, A4
+from reportlab.lib.units import cm
 from reportlab.pdfbase import pdfmetrics
 
 from src.config import util
@@ -51,7 +52,7 @@ class Measures:
         self.config_parser.read(ini_file)
 
     def read_general_measures_from_config(self):
-        self.label_height = util.CM_TO_POINTS * self.get_int_from_config("label_height")
+        self.label_height = cm * self.get_int_from_config("label_height")
         self.papersize = landscape(A4)  # TODO
         self.paperwidth = self.papersize[0]
 
