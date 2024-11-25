@@ -30,6 +30,15 @@ def get_int(config_parser: configparser.ConfigParser, section: str, option: str)
         raise ValueError(f"Invalid integer value for \"{option}\" in section \"{section}\": {value}")
 
 
+def get_float(config_parser: configparser.ConfigParser, section: str, option: str) -> float:
+    """Helper method to safely convert an INI value to an integer"""
+    value = config_parser[section].get(option)
+    try:
+        return float(value)
+    except ValueError:
+        raise ValueError(f"Invalid float value for \"{option}\" in section \"{section}\": {value}")
+
+
 def determine_scale_factor(string: str, fontsize: int, max_width: float) -> float:
     from src.config import config
     string_width: float = pdfmetrics.stringWidth(string, config.styles.font, fontsize)

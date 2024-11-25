@@ -5,7 +5,7 @@ from reportlab.lib.pagesizes import landscape
 from reportlab.lib.units import cm
 from reportlab.pdfbase import pdfmetrics
 
-from src.config.util import get_int, check_for_missing_section
+from src.config.util import get_int, check_for_missing_section, get_float
 from src.config.styles import Styles
 
 
@@ -18,6 +18,7 @@ class Measures:
 
     x_offset: float
     y_offset: float
+    max_width_factor: float
 
     max_x_offset: float
 
@@ -60,6 +61,7 @@ class Measures:
     def read_general_offsets_from_config(self):
         self.x_offset = self.get_int_from_config("x_offset")
         self.y_offset = self.get_int_from_config("y_offset")
+        self.max_width_factor = self.get_float_from_config("max_width_factor")
         self.max_x_offset = self.paperwidth - self.x_offset
 
     def set_positions_from_config(self):
@@ -102,3 +104,6 @@ class Measures:
 
     def get_int_from_config(self, key: str) -> int:
         return get_int(self.config_parser, "Measures", key)
+
+    def get_float_from_config(self, key: str) -> float:
+        return get_float(self.config_parser, "Measures", key)

@@ -29,7 +29,9 @@ class Styles:
 
         styles.read_font_types_from_config()
         styles.read_font_sizes_from_config()
+        # TODO: refactor the following two lines in one function
         styles.item_list_symbol = styles.config_parser["Styles"].get("item_list_symbol").strip('"').strip() + " "
+        styles.item_spacing = styles.get_int_from_config("item_spacing")
 
         return styles
     

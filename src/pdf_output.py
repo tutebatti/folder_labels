@@ -23,7 +23,7 @@ class PdfOutput(canvas.Canvas):
 
     def add_pagebreak_if_necessary(self, next_label: FolderLabel) -> None:
         if self.x_offset + next_label.width > config.measures.max_x_offset:
-            self.x_offset = 20
+            self.x_offset = config.measures.x_offset
             self.showPage()
 
     def add_rectangle(self, width: float) -> None:
@@ -55,7 +55,7 @@ class PdfOutput(canvas.Canvas):
         scale_factor: float = determine_scale_factor(
             string=description,
             fontsize=config.styles.description_size,
-            max_width=label_width * 0.8)
+            max_width=label_width * config.measures.max_width_factor)
         self.setFont(config.styles.font, config.styles.description_size * scale_factor)
         self.drawCentredString(
             x=self.x_offset + label_width / 2 + config.measures.description_x_offset_relative_to_label_center,
@@ -63,22 +63,23 @@ class PdfOutput(canvas.Canvas):
             text=description)
 
     def add_items(self, items: list[str], label_width: float) -> None:
-        items_text = '<br/>'.join([config.styles.item_list_symbol + " " + item for item in items])
+        items_text = '<br/>'.join([config.styles.item_list_symbol + chr(160) + item for item in items])
 
         styles = getSampleStyleSheet()
         item_style = styles['Normal']
         item_style.fontName = config.styles.font
-        item_style.leading = 16
+        item_style.fontSize = config.styles.item_size
+        item_style.leading = config.styles.item_spacing
 
         item_paragraph = Paragraph(items_text, item_style)
 
-        item_paragraph_width = label_width * 0.8
+        item_paragraph_width = label_width - 2 * config.measures.items_x_offset
         item_paragraph.wrapOn(self, item_paragraph_width, config.measures.label_height)
+
+        item_paragraph_x_position = self.x_offset + config.measures.items_x_offset
         item_paragraph_y_position = config.measures.items_y_position - item_paragraph.height
 
-        item_paragraph.drawOn(self,
-                              self.x_offset + config.measures.items_x_offset,
-                              item_paragraph_y_position)
+        item_paragraph.drawOn(self, item_paragraph_x_position, item_paragraph_y_position)
 
         # # Translate the canvas 45 degrees
         # c.translate(x_position + 10, y_position)  # Move the origin to the right of the bullet
