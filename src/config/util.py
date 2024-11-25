@@ -4,7 +4,8 @@ from typing import Dict
 
 from reportlab.pdfbase import pdfmetrics
 
-CM_TO_POINTS: float = 28.35 # leave unchanged
+CM_TO_POINTS: float = 28.35  # leave unchanged
+
 
 def str_to_bool(value: str) -> bool:
     """Helper method to convert string to boolean"""
@@ -47,6 +48,7 @@ def letters_from_ini(ini_file: str) -> dict:
     # TODO: check for duplicate values
 
     return letter_dict
+
 
 def widths_from_ini(ini_file: str) -> dict:
     config_parser = ConfigParser()

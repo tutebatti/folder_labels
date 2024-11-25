@@ -16,6 +16,7 @@ def create_pdf_from_csv(csv_file: str, outfile: str):
 
     pdf_output.save()
 
+
 def read_labels_from_csv(infile: str, delimiter: str = "\t") -> list[FolderLabel]:
     labels: list[FolderLabel] = list()
     with open(infile, "r") as file:
@@ -29,8 +30,10 @@ def read_labels_from_csv(infile: str, delimiter: str = "\t") -> list[FolderLabel
             labels.append(FolderLabel(letter, number, description, items, width))
     return labels
 
+
 def main(csv_file: str, outfile: str):
     create_pdf_from_csv(csv_file, outfile)
+
 
 if __name__ == "__main__":
     main(sys.argv[1], sys.argv[2])

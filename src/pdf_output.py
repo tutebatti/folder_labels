@@ -35,7 +35,10 @@ class PdfOutput(canvas.Canvas):
 
     def add_letter(self, letter: str, label_width: float) -> None:
         self.setFont(config.styles.font, config.styles.letter_size)
-        self.drawCentredString(x=self.x_offset + label_width / 2 + config.measures.letter_x_offset_relative_to_label_center,
+        letter_x_position: float = (self.x_offset
+                                    + label_width / 2
+                                    + config.measures.letter_x_offset_relative_to_label_center)
+        self.drawCentredString(x=letter_x_position,
                                y=config.measures.letter_y_position,
                                text=config.letters[letter])
 

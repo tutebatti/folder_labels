@@ -15,9 +15,8 @@ class FolderLabel:
                  items: list[str],
                  width: str):
 
-        if number <= 0 or number >=100:
+        if number <= 0 or number >= 100:
             raise ValueError(f"Number must be between 0 and 100")
-
 
         if letter not in config.letters:
             raise ValueError(f"{letter} is invalid. Choose from: {[key for key in config.letters]}")
